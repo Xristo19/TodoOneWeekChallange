@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "oneWeekChallangeToDo:build:production"
+              "buildTarget": "oneWeekChallangeToDo:build:production"
             },
             "development": {
-              "browserTarget": "oneWeekChallangeToDo:build:development"
+              "buildTarget": "oneWeekChallangeToDo:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +76,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "oneWeekChallangeToDo:build"
+            "buildTarget": "oneWeekChallangeToDo:build"
           }
         },
         "test": {
