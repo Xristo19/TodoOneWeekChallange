@@ -1,17 +1,12 @@
 <section class="section">
-
   <div class="divCenter">
-   <form>
-       <input type="text" matInput placeholder="Enter Todo name">
-       <div class="bColor">
-         <p>Todo 1</p>
-         <p>Todo 2</p>
-         <p>Todo 3</p>
-         <p>Todo 4</p>
-         <p>Todo 5</p>
-         <p>Todo 6</p>
-       </div>
-   </form>
+    <form>
+      <input type="text" matInput placeholder="Enter Todo name">
+      <div *ngIf="allTodos$ | async as todos">
+        <div *ngFor="let todo of todos">
+          {{ todo.todo}}
+        </div>
+      </div>
+    </form>
   </div>
-
 </section>

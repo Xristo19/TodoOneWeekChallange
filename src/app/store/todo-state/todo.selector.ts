@@ -5,5 +5,7 @@ export const todoState : MemoizedSelector<any, any> = createFeatureSelector<Todo
 
 export const todoSelector = createSelector(
   todoState,
-  (state:TodoState) => state.list
+  (state:TodoState) => {
+      return state.list
+  }
 )

@@ -1,12 +1,15 @@
 import {createReducer, on} from "@ngrx/store";
 import {TodoActions} from "./todo.action";
-import {todoInitialState} from "./entity/todo.interface";
+import {Todo, todoInitialState} from "./entity/todo.interface";
 
 export const todoReducer = createReducer(
-  todoInitialState,
-  on(
-    TodoActions.getResponse,
-    (state, {list}) => ({...state, list})
-  )
+    todoInitialState,
+    on(
+        TodoActions.getResponse,
+        (state, sourceList) => {
+            const list: Todo[] = Array.from(sourceList[0]);
+            return {...state, list}
+        }
+    )
 )
 
