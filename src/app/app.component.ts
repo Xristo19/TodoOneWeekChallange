@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {TodosComponent} from "./pages/todos/todos.component";
 import {HeaderComponent} from "./layout/background/header.component";
-import {TableComponent} from "./shared/components/table-component/table.component";
 
 @Component({
   selector: 'app-root',
@@ -10,7 +9,6 @@ import {TableComponent} from "./shared/components/table-component/table.componen
   imports: [
     TodosComponent,
     HeaderComponent,
-    TableComponent
   ],
   standalone: true
 })

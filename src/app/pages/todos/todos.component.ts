@@ -1,5 +1,4 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {MatInput} from "@angular/material/input";
 import {Store} from "@ngrx/store";
 import {TodoActions} from "../../store/todo-state/todo.action";
 import {todoSelector} from "../../store/todo-state/todo.selector";
@@ -9,7 +8,6 @@ import {TableComponent} from "../../shared/components/table-component/table.comp
 @Component({
   selector: 'app-todos',
   imports: [
-    MatInput,
     AsyncPipe,
     TableComponent,
   ],
