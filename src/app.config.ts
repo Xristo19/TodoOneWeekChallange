@@ -7,6 +7,9 @@ import {provideStoreDevtools} from "@ngrx/store-devtools";
 import {TodoEffect} from "./app/store/todo-state/todo.effect";
 import {routes} from "./app/app-routing.module";
 import {appReducers, metaReducers} from "./app/store/app-state/app.reducer";
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatButtonModule} from "@angular/material/button";
+import {provideAnimations} from "@angular/platform-browser/animations";
 
 
 export const appConfig:ApplicationConfig = {
@@ -16,6 +19,9 @@ export const appConfig:ApplicationConfig = {
     provideStore(appReducers, { metaReducers }),
     provideStoreDevtools({ maxAge: 25 }),
     provideEffects([TodoEffect]),
-    provideHttpClient()
-  ]
+    provideHttpClient(),
+    MatDialogModule,
+    MatButtonModule,
+    provideAnimations(),
+  ],
 }

@@ -1,3 +1,6 @@
-<app-table-component
+<app-table
 [todos]="allTodos$ | async"
-></app-table-component>
+(editTodo)="onEdit($event)"
+(deleteTodo)="onDelete($event)"
+(toggleTodo)="onComplete($event)"
+></app-table>
