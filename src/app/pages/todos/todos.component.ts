@@ -22,4 +22,7 @@ export class TodosComponent implements OnInit{
     this._store.dispatch(TodoActions.getRequest)
   }
 
+  // removeTodo(todo:Todo){
+  //   this._store.dispatch(TodoActions.deleteResponse({id: todo.id}))
+  // }
 }

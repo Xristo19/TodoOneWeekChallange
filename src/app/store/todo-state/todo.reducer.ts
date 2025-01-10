@@ -10,6 +10,13 @@ export const todoReducer = createReducer(
             const list: Todo[] = Array.from(sourceList[0]);
             return {...state, list}
         }
-    )
+    ),
+  on(
+    TodoActions.deleteResponse,
+    (state, { id }) => {
+      const updatedList = state.list.filter(todo => todo.id !== id);
+      return { ...state, list: updatedList };
+    }
+  )
 )
 
