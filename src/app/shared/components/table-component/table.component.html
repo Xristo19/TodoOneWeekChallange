@@ -1,0 +1,33 @@
+<div class="todo-list">
+  <div class="top-display"><h1>Todo</h1></div>
+  <div class="input-container">
+    <div class="circle"></div>
+    <input type="text" placeholder="Create a new task...">
+  </div>
+  <ul class="todo-items">
+    @for (todo of todos; track todo.id) {
+      <li
+        class="todo-item"
+        [ngClass]="{ 'completed': todo.completed }">
+        <button
+          class="checkbox"
+          [ngClass]="{ 'completed': todo.completed }">
+        </button>
+        {{ todo.todo }}
+        <i class="fa-solid fa-trash icon-trash"></i>
+        <span class="material-symbols-outlined icon-edit">
+          edit
+        </span>
+      </li>
+    }
+  </ul>
+  <div class="bottom-display">
+    <p id="todo-items-left">{{ todos?.length }} tasks left</p>
+    <div class="filter-buttons">
+      <button class="filter-button active">All</button>
+      <button class="filter-button">Active</button>
+      <button class="filter-button">Completed</button>
+    </div>
+    <button class="clear-completed">Clear Completed</button>
+  </div>
+</div>
