@@ -1,0 +1,172 @@
+.todo-list {
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  top: 3rem;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  z-index: 4;
+
+  .top-display {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    letter-spacing: 1rem;
+    text-transform: uppercase;
+    color: #e5e3df;
+
+    h1 {
+      font-size: 3rem;
+    }
+  }
+
+  .input-container {
+    position: relative;
+    padding: 2rem 0;
+
+    .circle {
+      width: 1.25rem;
+      height: 1.25rem;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      left: 1.5rem;
+      border-radius: 50%;
+      border: 0.1rem solid #6f675b;
+    }
+
+    input {
+      border: none;
+      background-color: hsl(235, 24%, 19%);
+      color: #b6c7df;
+      caret-color: #439efd;
+      width: 100%;
+      font-size: 1rem;
+      font-family: "Josefin Sans", sans-serif;
+      padding: 1.5rem 1.5rem 1.5rem 3.5rem;
+      outline: none;
+      border-radius: 0.25rem;
+    }
+  }
+
+  .todo-items {
+    list-style: none;
+    background-color: hsl(235, 24%, 19%);
+    border-radius: 0.25rem 0.25rem 0 0;
+
+    .todo-item {
+      color: #b6c7df;
+      border-bottom: 1px solid hsl(233, 14%, 35%);
+      display: flex;
+      align-items: center;
+      padding: 1.5rem;
+      transition: 0.15s;
+      gap: 1rem;
+
+      &:hover {
+        background-color: rgb(22, 23, 35);
+      }
+
+      &.completed {
+        color: hsl(233, 14%, 35%);
+        text-decoration: line-through;
+
+        &:hover {
+          background: none;
+        }
+      }
+
+      .checkbox {
+        background-color: transparent;
+        border: 0.1rem solid #6f678e;
+        min-width: 1.25rem;
+        min-height: 1.25rem;
+        cursor: pointer;
+        border-radius: 50%;
+        transition: 0.15s;
+
+        &.completed {
+          border: none;
+          background: url('https://liyannguyen.github.io/todo-app/assets/icon-check.bcf055e6.svg') no-repeat center,
+          linear-gradient(120deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+          cursor: default;
+        }
+
+        &:hover {
+          background: url('https://liyannguyen.github.io/todo-app/assets/icon-check.bcf055e6.svg') no-repeat center,
+          linear-gradient(120deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+        }
+      }
+
+      .icon-trash {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        margin-left: auto;
+
+        &:hover {
+          color: rgb(145, 46, 46);
+        }
+      }
+
+      .icon-edit {
+        cursor: pointer;
+
+        &:hover {
+          color: hsl(233, 14%, 35%);
+        }
+      }
+    }
+  }
+
+  .bottom-display {
+    background-color: hsl(235, 24%, 19%);
+    color: #9b9285;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    align-items: center;
+    padding: 1.5rem;
+    border-radius: 0 0 0.25rem 0.25rem;
+
+    #todo-items-left {
+      cursor: default;
+    }
+
+    .filter-buttons {
+      font-weight: 700;
+      display: flex;
+      gap: 1rem;
+
+      .filter-button {
+        color: #439efd;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        font-weight: 700;
+        transition: 0.15s;
+
+        &.active {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .clear-completed {
+      background-color: transparent;
+      border: none;
+      color: inherit;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+  }
+}
+
+@media screen and (min-width: 1366px) {
+  .todo-list {
+    top: 5rem;
+    width: 780px;
+  }
+}

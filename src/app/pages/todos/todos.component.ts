@@ -1,18 +1,15 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {MatInput} from "@angular/material/input";
 import {Store} from "@ngrx/store";
 import {TodoActions} from "../../store/todo-state/todo.action";
 import {todoSelector} from "../../store/todo-state/todo.selector";
-import {AsyncPipe, JsonPipe, NgForOf, NgIf} from "@angular/common";
-import {Todo} from "../../store/todo-state/entity/todo.interface";
+import {AsyncPipe} from "@angular/common";
+import {TableComponent} from "../../shared/components/table-component/table.component";
 
 @Component({
   selector: 'app-todos',
   imports: [
-    MatInput,
     AsyncPipe,
-    NgIf,
-    NgForOf,
+    TableComponent,
   ],
   templateUrl: './todos.component.html',
   styleUrl: './todos.component.scss'
@@ -21,13 +18,11 @@ export class TodosComponent implements OnInit{
   private _store = inject(Store)
   public allTodos$ = this._store.select(todoSelector)
 
-
-
   ngOnInit() {
     this._store.dispatch(TodoActions.getRequest)
   }
 
-  removeTodo(todo:Todo){
-    this._store.dispatch(TodoActions.deleteResponse({id: todo.id}))
-  }
+  // removeTodo(todo:Todo){
+  //   this._store.dispatch(TodoActions.deleteResponse({id: todo.id}))
+  // }
 }

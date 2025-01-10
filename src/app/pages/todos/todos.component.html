@@ -1,12 +1,3 @@
-<section class="section">
-  <div class="divCenter">
-    <form>
-      <input type="text" matInput placeholder="Enter Todo name">
-      <div *ngIf="allTodos$ | async as todos">
-        <div *ngFor="let todo of todos" (click)="removeTodo(todo)">
-          {{ todo.todo}}
-        </div>
-      </div>
-    </form>
-  </div>
-</section>
+<app-table-component
+[todos]="allTodos$ | async"
+></app-table-component>

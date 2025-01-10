@@ -1,8 +1,8 @@
 import {inject} from "@angular/core";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
-import {TodoService} from "../../services/todo.service";
+import {TodoService} from "../../shared/services/todo.service";
 import {TodoActions} from "./todo.action";
-import {map, mergeMap, tap} from "rxjs";
+import {map, mergeMap} from "rxjs";
 import {Todo} from "./entity/todo.interface";
 
 export class TodoEffect {
@@ -16,6 +16,5 @@ export class TodoEffect {
         )),
         map((list: Todo[]) => TodoActions.getResponse([list]))
     ))
-
 
 }
