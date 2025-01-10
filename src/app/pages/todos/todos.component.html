@@ -3,7 +3,7 @@
     <form>
       <input type="text" matInput placeholder="Enter Todo name">
       <div *ngIf="allTodos$ | async as todos">
-        <div *ngFor="let todo of todos">
+        <div *ngFor="let todo of todos" (click)="removeTodo(todo)">
           {{ todo.todo}}
         </div>
       </div>

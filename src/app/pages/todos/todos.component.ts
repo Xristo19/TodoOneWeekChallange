@@ -4,6 +4,7 @@ import {Store} from "@ngrx/store";
 import {TodoActions} from "../../store/todo-state/todo.action";
 import {todoSelector} from "../../store/todo-state/todo.selector";
 import {AsyncPipe, JsonPipe, NgForOf, NgIf} from "@angular/common";
+import {Todo} from "../../store/todo-state/entity/todo.interface";
 
 @Component({
   selector: 'app-todos',
@@ -12,7 +13,6 @@ import {AsyncPipe, JsonPipe, NgForOf, NgIf} from "@angular/common";
     AsyncPipe,
     NgIf,
     NgForOf,
-    JsonPipe,
   ],
   templateUrl: './todos.component.html',
   styleUrl: './todos.component.scss'
@@ -27,4 +27,7 @@ export class TodosComponent implements OnInit{
     this._store.dispatch(TodoActions.getRequest)
   }
 
+  removeTodo(todo:Todo){
+    this._store.dispatch(TodoActions.deleteResponse({id: todo.id}))
+  }
 }
