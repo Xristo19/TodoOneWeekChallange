@@ -2,7 +2,7 @@ import {environments} from "../../enviroments/enviroments";
 import {inject, Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {map, Observable} from "rxjs";
-import {EditTodo, Todo, TodoResponse} from "../../store/todo-state/entity/todo.interface";
+import {CreateTodoRequest, EditTodo, Todo, TodoResponse} from "../../store/todo-state/entity/todo.interface";
 
 @Injectable({
     providedIn: 'root',
@@ -21,4 +21,7 @@ export class TodoService {
         return this.http.put<Todo>(`${this.API_URL}/todos/${id}`, todo);
     }
 
+  create(todo: CreateTodoRequest): Observable<Todo> {
+    return this.http.post<Todo>(`${this.API_URL}/todos/add`, todo);
+  }
 }

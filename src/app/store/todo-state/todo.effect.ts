@@ -3,7 +3,7 @@ import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {TodoService} from "../../shared/services/todo.service";
 import {TodoActions} from "./todo.action";
 import {catchError, EMPTY, map, mergeMap} from "rxjs";
-import {Todo, TodoResponse} from "./entity/todo.interface";
+import {CreateTodoRequest, Todo, TodoResponse} from "./entity/todo.interface";
 
 export class TodoEffect {
   private actions$ = inject(Actions)
@@ -34,4 +34,17 @@ export class TodoEffect {
       )
     )
   );
+
+  createTodoRequest$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TodoActions.createTodoRequest),
+      mergeMap(({ todo })  =>
+        this.todoService.create(todo).pipe(
+          map((createdTodo: Todo) => TodoActions.createTodoResponse({ todo: createdTodo })),
+          catchError(() => EMPTY)
+        )
+      )
+    )
+  );
+
 }

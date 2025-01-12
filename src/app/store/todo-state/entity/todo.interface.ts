@@ -5,6 +5,12 @@ export interface Todo {
   userId: number;
 }
 
+export interface CreateTodoRequest {
+  todo: string;
+  completed: boolean;
+  userId: number;
+}
+
 export interface TodoResponse {
   todos: Todo[];
   total: number;

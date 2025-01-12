@@ -1,5 +1,6 @@
-<h2 mat-dialog-title>{{ data.title }}</h2>
-<mat-dialog-content>
+<h2 mat-dialog-title *ngIf="isCreateMode">Are you sure you want to create this todo?</h2>
+<h2 mat-dialog-title *ngIf="!isCreateMode">{{ data.title }}</h2>
+<mat-dialog-content *ngIf="!isCreateMode">
   <form [formGroup]="form" id="form">
     <!-- Todo Name Input -->
     <mat-form-field appearance="fill">
@@ -25,6 +26,9 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-button (click)="onCancel()">Cancel</button>
-  <button mat-button color="primary" (click)="onConfirm()">Save</button>
+  <button mat-button *ngIf="isCreateMode" (click)="onCancel()">No</button>
+  <button mat-button color="primary" *ngIf="isCreateMode" (click)="onConfirm()">Yes</button>
+
+  <button mat-button *ngIf="!isCreateMode" (click)="onCancel()">Cancel</button>
+  <button mat-button color="primary" *ngIf="!isCreateMode" (click)="onConfirm()">Save</button>
 </mat-dialog-actions>

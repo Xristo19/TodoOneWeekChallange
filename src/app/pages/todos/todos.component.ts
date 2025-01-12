@@ -4,10 +4,11 @@ import {TodoActions} from "../../store/todo-state/todo.action";
 import {todoSelector} from "../../store/todo-state/todo.selector";
 import {AsyncPipe} from "@angular/common";
 import {TableComponent} from "../../shared/components/table/table.component";
-import {Todo} from "../../store/todo-state/entity/todo.interface";
+import {CreateTodoRequest, Todo} from "../../store/todo-state/entity/todo.interface";
 import {SharedDialogComponent} from "../../shared/components/dialog/dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {TodoService} from "../../shared/services/todo.service";
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-todos',
@@ -19,6 +20,7 @@ import {TodoService} from "../../shared/services/todo.service";
   styleUrl: './todos.component.scss'
 })
 export class TodosComponent implements OnInit {
+  todoText = new FormControl('');
   private _store = inject(Store);
   private dialog = inject(MatDialog);
   public allTodos$ = this._store.select(todoSelector);
@@ -51,6 +53,26 @@ export class TodosComponent implements OnInit {
             todo: result
           })
         );
+      }
+    });
+  }
+
+  onCreate(todoText: string) {
+    const dialogRef = this.dialog.open(SharedDialogComponent, {
+      width: '400px',
+      data: {
+        isCreate: true
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.todoText.reset();
+        const newTodo = { todo: todoText, completed: false, userId: 1 };
+        console.log(todoText)
+        this._store.dispatch(
+          TodoActions.createTodoRequest({
+            todo: newTodo }));
       }
     });
   }

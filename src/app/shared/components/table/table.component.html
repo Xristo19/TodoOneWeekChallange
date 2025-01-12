@@ -1,8 +1,14 @@
 <div class="todo-list">
   <div class="top-display"><h1>Todo</h1></div>
   <div class="input-container">
-    <div class="circle"></div>
-    <input type="text" placeholder="Create a new task...">
+    <input type="text"
+           [formControl]="todoText"
+           (input)="onInputChange()"
+           placeholder="Create a new task...">
+    <button
+    *ngIf="showCreateButton"
+    (click)="onCreate()"
+    class="create-button">+</button>
   </div>
   <ul class="todo-items">
     @for (todo of todos; track todo.id) {
