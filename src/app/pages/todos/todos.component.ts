@@ -4,9 +4,11 @@ import {TodoActions} from "../../store/todo-state/todo.action";
 import {todoSelector} from "../../store/todo-state/todo.selector";
 import {AsyncPipe} from "@angular/common";
 import {TableComponent} from "../../shared/components/table/table.component";
-import {Todo} from "../../store/todo-state/entity/todo.interface";
+import {CreateTodoRequest, Todo} from "../../store/todo-state/entity/todo.interface";
 import {SharedDialogComponent} from "../../shared/components/dialog/dialog.component";
 import {MatDialog} from "@angular/material/dialog";
+import {TodoService} from "../../shared/services/todo.service";
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-todos',
@@ -21,22 +23,17 @@ export class TodosComponent {
   private _store = inject(Store);
   private dialog = inject(MatDialog);
   public allTodos$ = this._store.select(todoSelector);
+  public todoText = new FormControl('');
 
 
   getTodoList(): void {
     this._store.dispatch(TodoActions.getRequest());
   }
 
-  onToggle(todo: Todo): void {
-    // const updatedTodo = { ...todo, completed: !todo.completed };
-    // this._store.dispatch(TodoActions.updateRequest({ todo: updatedTodo }));
-  }
-
   onEdit(todo: Todo): void {
     const dialogRef = this.dialog.open(SharedDialogComponent, {
       width: '400px',
       data: {
-        type: 'edit',
         title: `Edit Todo ${todo.id}`,
         todo: {...todo},
       },
@@ -44,7 +41,33 @@ export class TodosComponent {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this._store.dispatch(TodoActions.getEditRequest({id: todo.id, todo: result}));
+        this._store.dispatch(
+          TodoActions.getEditRequest({
+            id: todo.id,
+            todo: result
+          })
+        );
+      }
+    });
+  }
+
+  onCreate(todoText: string) {
+    const dialogRef = this.dialog.open(SharedDialogComponent, {
+      width: '400px',
+      data: {
+        isCreate: true
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.todoText.reset();
+        const newTodo = {todo: todoText, completed: false, userId: 1};
+        console.log(todoText)
+        this._store.dispatch(
+          TodoActions.createTodoRequest({
+            todo: newTodo
+          }));
       }
     });
   }
@@ -81,11 +104,8 @@ export class TodosComponent {
     dialogRef.afterClosed().subscribe((confirmed) => {
       if (confirmed) {
         const updatedTodo = {...todo, completed: true};
-        this._store.dispatch(TodoActions.completeRequest({ id: todo.id, todo: updatedTodo }));
+        this._store.dispatch(TodoActions.completeRequest({id: todo.id, todo: updatedTodo}));
       }
     });
   }
-
-
-
 }

@@ -17,6 +17,7 @@ import {CommonModule, NgSwitch} from "@angular/common";
   selector: 'app-shared-dialog',
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss'],
+  standalone: true,
   imports: [
     MatDialogContent,
     MatDialogActions,
@@ -33,7 +34,7 @@ import {CommonModule, NgSwitch} from "@angular/common";
     NgSwitch
   ],
 })
-export class SharedDialogComponent implements OnInit {
+export class SharedDialogComponent  implements OnInit {
   form!: FormGroup;
 
   constructor(
@@ -63,6 +64,4 @@ export class SharedDialogComponent implements OnInit {
       this.dialogRef.close(true);
     }
   }
-
-  protected readonly JSON = JSON;
 }
