@@ -11,9 +11,14 @@ import {HoverDirective} from "../../directives/hover.directive";
 })
 export class TableComponent {
   @Input() todos: Todo[] | null = []
+  @Output() getTodos = new EventEmitter();
   @Output() editTodo = new EventEmitter<Todo>();
   @Output() deleteTodo = new EventEmitter<Todo>();
   @Output() toggleTodo = new EventEmitter<Todo>();
+
+  onGet(): void {
+    this.getTodos.emit()
+  }
 
   onEdit(todo: Todo): void {
     this.editTodo.emit(todo);
@@ -26,4 +31,6 @@ export class TableComponent {
   onToggle(todo: Todo): void {
     this.toggleTodo.emit(todo);
   }
+
+
 }

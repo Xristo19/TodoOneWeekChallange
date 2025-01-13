@@ -3,3 +3,24 @@
   justify-content: center;
   flex-flow: column;
 }
+
+.dialog-content {
+  text-align: center;
+  font-size: 1.1rem;
+  padding: 10px 20px;
+}
+
+.dialog-message {
+  word-wrap: break-word;
+  margin: 15px 0;
+}
+
+mat-dialog-actions {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+
+  button {
+    min-width: 100px;
+  }
+}

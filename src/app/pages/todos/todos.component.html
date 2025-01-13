@@ -1,5 +1,6 @@
 <app-table
 [todos]="allTodos$ | async"
+(getTodos)="getTodoList()"
 (editTodo)="onEdit($event)"
 (deleteTodo)="onDelete($event)"
 (toggleTodo)="onComplete($event)"

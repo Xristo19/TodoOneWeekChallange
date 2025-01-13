@@ -1,5 +1,13 @@
 <div class="todo-list">
-  <div class="top-display"><h1>Todo</h1></div>
+  <div class="top-display">
+    <h1>
+      <button
+        class="todos-button"
+        (click)="onGet()">
+        Todos
+      </button>
+    </h1>
+  </div>
   <div class="input-container">
     <div class="circle"></div>
     <input type="text" placeholder="Create a new task...">
