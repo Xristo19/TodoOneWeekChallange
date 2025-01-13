@@ -27,6 +27,11 @@ export class TodoService {
     return this.http.put<Todo>(`${this.API_URL}/todos/${id}`, todo);
   }
 
+  completed(id: number, completed: boolean): Observable<Todo> {
+    const body = { completed };
+    return this.http.patch<Todo>(`${this.API_URL}/todos/${id}`, body);
+  }
+
   create(todo: CreateTodoRequest): Observable<Todo> {
     return this.http.post<Todo>(`${this.API_URL}/todos/add`, todo);
   }

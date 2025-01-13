@@ -38,9 +38,9 @@ export class TodoEffect {
   createTodoRequest$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TodoActions.createTodoRequest),
-      mergeMap(({ todo })  =>
+      mergeMap(({todo}) =>
         this.todoService.create(todo).pipe(
-          map((createdTodo: Todo) => TodoActions.createTodoResponse({ todo: createdTodo })),
+          map((createdTodo: Todo) => TodoActions.createTodoResponse({todo: createdTodo})),
           catchError(() => EMPTY)
         )
       )
@@ -51,22 +51,28 @@ export class TodoEffect {
   completeRequest$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TodoActions.completeRequest),
-      mergeMap(({id, todo}) =>
-        this.todoService.edit(id, todo).pipe(
-          map((updatedTodo: Todo) => TodoActions.completeResponse(updatedTodo)),
-          catchError(() => EMPTY)
+      mergeMap(({id, completed}) =>
+        this.todoService.completed(id, completed).pipe(
+          map((updatedTodo: Todo) => TodoActions.completeResponse({todo: updatedTodo})),
+          catchError((error) => {
+            console.error('Error completing the todo:', error);
+            return EMPTY;
+          })
         )
       )
-    ));
+    )
+  );
+
 
   deleteRequest$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TodoActions.deleteRequest),
       mergeMap(({id}) =>
         this.todoService.delete(id).pipe(
-          map((deletedTodo: DeletedTodo) => {
-            console.log(deletedTodo)
-            return TodoActions.deleteResponse(deletedTodo)
+          map((deletedTodo: DeletedTodo) => TodoActions.deleteResponse(deletedTodo)),
+          catchError((error) => {
+            console.error('Error completing the todo:', error);
+            return EMPTY;
           })
         ))
     ));

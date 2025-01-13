@@ -6,10 +6,10 @@ const getRequest: ActionCreator<string, any> = createAction(TodoEnum.GET_REQUEST
 const getResponse: ActionCreator<string, any> = createAction(TodoEnum.GET_RESPONSE, props<{todos: Todo}>());
 const getEditRequest: ActionCreator<string, any> = createAction(TodoEnum.PUT_REQUEST, props<{id: number, todo: EditTodo}>());
 const getEditResponse: ActionCreator<string, any> = createAction(TodoEnum.PUT_RESPONSE, props<Todo>());
-const completeRequest: ActionCreator<string, any> = createAction(TodoEnum.COMPLETE_REQUEST ,props<{id: number, todo: EditTodo}>());
-const completeResponse: ActionCreator<string, any> = createAction(TodoEnum.COMPLETE_RESPONSE, props<Todo>());
+const completeRequest: ActionCreator<string, any> = createAction(TodoEnum.COMPLETE_REQUEST ,props<{id: number, completed: boolean}>());
+const completeResponse: ActionCreator<string, any> = createAction(TodoEnum.COMPLETE_RESPONSE, props<{ todo: Todo }>());
 const deleteRequest: ActionCreator<string, any> = createAction(TodoEnum.DELETE_REQUEST, props<{ id: number }>());
-const deleteResponse: ActionCreator<string, any> = createAction(TodoEnum.DELETE_RESPONSE, props<{ id: number }>());
+const deleteResponse: ActionCreator<string, any> = createAction(TodoEnum.DELETE_RESPONSE, props<{ todo: DeletedTodo }>());
 const createTodoRequest: ActionCreator<string, any> = createAction(TodoEnum.POST_REQUEST, props<{ todo: CreateTodoRequest }>());
 const createTodoResponse: ActionCreator<string, any> = createAction(TodoEnum.POST_RESPONSE, props<{ todo: Todo }>());
 

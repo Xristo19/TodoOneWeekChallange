@@ -34,6 +34,7 @@ export class TodosComponent {
     const dialogRef = this.dialog.open(SharedDialogComponent, {
       width: '400px',
       data: {
+        type: 'edit',
         title: `Edit Todo ${todo.id}`,
         todo: {...todo},
       },
@@ -44,7 +45,7 @@ export class TodosComponent {
         this._store.dispatch(
           TodoActions.getEditRequest({
             id: todo.id,
-            todo: result
+            todo: result,
           })
         );
       }
@@ -103,8 +104,7 @@ export class TodosComponent {
 
     dialogRef.afterClosed().subscribe((confirmed) => {
       if (confirmed) {
-        const updatedTodo = {...todo, completed: true};
-        this._store.dispatch(TodoActions.completeRequest({id: todo.id, todo: updatedTodo}));
+        this._store.dispatch(TodoActions.completeRequest({id: todo.id, completed: true}));
       }
     });
   }
