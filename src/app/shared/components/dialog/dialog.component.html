@@ -1,34 +1,60 @@
-<h2 mat-dialog-title *ngIf="isCreateMode">Are you sure you want to create this todo?</h2>
-<h2 mat-dialog-title *ngIf="!isCreateMode">{{ data.title }}</h2>
-<mat-dialog-content *ngIf="!isCreateMode">
-  <form [formGroup]="form" id="form">
-    <!-- Todo Name Input -->
-    <mat-form-field appearance="fill">
-      <mat-label>Todo Name</mat-label>
-      <input matInput placeholder="Enter new Todo name" formControlName="todo" />
-    </mat-form-field>
+<h2 mat-dialog-title>{{ data.title }}</h2>
+<mat-dialog-content class="dialog-content">
+    <ng-container [ngSwitch]="data.type || (data.isCreate ? 'create' : '')">
+        <!-- Complete Dialog -->
+        <p *ngSwitchCase="'complete'" class="dialog-message">
+            {{ data.message }}
+        </p>
 
-    <!-- Completed Dropdown -->
-    <mat-form-field appearance="fill">
-      <mat-label>Completed</mat-label>
-      <mat-select formControlName="completed">
-        <mat-option [value]="true">True</mat-option>
-        <mat-option [value]="false">False</mat-option>
-      </mat-select>
-    </mat-form-field>
+        <!-- Delete Dialog -->
+        <p *ngSwitchCase="'delete'" class="dialog-message">
+            {{ data.message }}
+        </p>
 
-    <!-- User ID Input -->
-    <mat-form-field appearance="fill">
-      <mat-label>User ID</mat-label>
-      <input matInput type="number" placeholder="Enter User ID" formControlName="userId" />
-    </mat-form-field>
-  </form>
+        <!-- Edit Dialog -->
+        <form *ngSwitchCase="'edit'" [formGroup]="form">
+            <mat-form-field appearance="fill">
+                <mat-label>Todo Name</mat-label>
+                <input matInput formControlName="todo" placeholder="Enter Todo Name"/>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Completed</mat-label>
+                <mat-select formControlName="completed">
+                    <mat-option [value]="true">True</mat-option>
+                    <mat-option [value]="false">False</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>User ID</mat-label>
+                <input matInput type="number" formControlName="userId" placeholder="Enter User ID"/>
+            </mat-form-field>
+        </form>
+
+        <!-- Create Dialog -->
+        <form *ngSwitchCase="'create'" [formGroup]="form">
+            <mat-form-field appearance="fill">
+                <mat-label>Todo Name</mat-label>
+                <input matInput formControlName="todo" placeholder="Enter Todo Name"/>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>User ID</mat-label>
+                <input matInput type="number" formControlName="userId" placeholder="Enter User ID"/>
+            </mat-form-field>
+        </form>
+
+        <!-- Default Case -->
+        <p *ngSwitchDefault class="dialog-message">
+            {{ data.message }}
+        </p>
+    </ng-container>
 </mat-dialog-content>
-
-<mat-dialog-actions align="end">
-  <button mat-button *ngIf="isCreateMode" (click)="onCancel()">No</button>
-  <button mat-button color="primary" *ngIf="isCreateMode" (click)="onConfirm()">Yes</button>
-
-  <button mat-button *ngIf="!isCreateMode" (click)="onCancel()">Cancel</button>
-  <button mat-button color="primary" *ngIf="!isCreateMode" (click)="onConfirm()">Save</button>
+<mat-dialog-actions align="center">
+    <button mat-stroked-button color="primary" (click)="onCancel()">No</button>
+    <button mat-raised-button color="accent" *ngIf="data.type === 'edit' || data.isCreate" (click)="onConfirm()">Save
+    </button>
+    <button mat-raised-button color="warn" *ngIf="data.type !== 'edit' && !data.isCreate" (click)="onConfirm()">Yes
+    </button>
 </mat-dialog-actions>

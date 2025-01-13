@@ -16,6 +16,32 @@
     text-transform: uppercase;
     color: #e5e3df;
 
+    .todos-button {
+      background: none;
+      border: none;
+      font-size: inherit;
+      font-weight: bold;
+      color: inherit;
+      text-transform: uppercase;
+      letter-spacing: 6px;
+      cursor: pointer;
+      transition: color 0.3s ease, transform 0.2s ease;
+
+      &:hover {
+        color: #439efd;
+        transform: scale(1.05);
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+
     h1 {
       font-size: 3rem;
     }

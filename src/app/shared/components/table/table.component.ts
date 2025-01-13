@@ -15,10 +15,15 @@ export class TableComponent {
   @Input() todoText =  new FormControl('')
   showCreateButton: boolean = false;
   @Input() todos: Todo[] | null = []
+  @Output() getTodos = new EventEmitter();
   @Output() editTodo = new EventEmitter<Todo>();
   @Output() createTodo = new EventEmitter<string>();
   @Output() deleteTodo = new EventEmitter<Todo>();
   @Output() toggleTodo = new EventEmitter<Todo>();
+
+  onGet(): void {
+    this.getTodos.emit()
+  }
 
   onEdit(todo: Todo): void {
     this.editTodo.emit(todo);

@@ -24,6 +24,16 @@ export interface EditTodo {
   userId: number;
 }
 
+export interface DeletedTodo {
+  id: number;
+  todo: string;
+  completed: boolean;
+  userId: number;
+  isDeleted: boolean;
+  deletedOn?: Date;
+}
+
+
 export interface TodoState {
   list: Todo[];
 }
