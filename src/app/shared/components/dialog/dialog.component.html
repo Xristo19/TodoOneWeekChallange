@@ -1,17 +1,12 @@
 <h2 mat-dialog-title>{{ data.title }}</h2>
 <mat-dialog-content class="dialog-content">
     <ng-container [ngSwitch]="data.type || (data.isCreate ? 'create' : '')">
-        <!-- Complete Dialog -->
         <p *ngSwitchCase="'complete'" class="dialog-message">
             {{ data.message }}
         </p>
-
-        <!-- Delete Dialog -->
         <p *ngSwitchCase="'delete'" class="dialog-message">
             {{ data.message }}
         </p>
-
-        <!-- Edit Dialog -->
         <form *ngSwitchCase="'edit'" [formGroup]="form">
             <mat-form-field appearance="fill">
                 <mat-label>Todo Name</mat-label>
@@ -31,21 +26,16 @@
                 <input matInput type="number" formControlName="userId" placeholder="Enter User ID"/>
             </mat-form-field>
         </form>
-
-        <!-- Create Dialog -->
         <form *ngSwitchCase="'create'" [formGroup]="form">
             <mat-form-field appearance="fill">
                 <mat-label>Todo Name</mat-label>
                 <input matInput formControlName="todo" placeholder="Enter Todo Name"/>
             </mat-form-field>
-
             <mat-form-field appearance="fill">
                 <mat-label>User ID</mat-label>
                 <input matInput type="number" formControlName="userId" placeholder="Enter User ID"/>
             </mat-form-field>
         </form>
-
-        <!-- Default Case -->
         <p *ngSwitchDefault class="dialog-message">
             {{ data.message }}
         </p>

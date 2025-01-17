@@ -4,10 +4,9 @@ import {TodoActions} from "../../store/todo-state/todo.action";
 import {todoSelector} from "../../store/todo-state/todo.selector";
 import {AsyncPipe} from "@angular/common";
 import {TableComponent} from "../../shared/components/table/table.component";
-import {CreateTodoRequest, Todo} from "../../store/todo-state/entity/todo.interface";
+import {Todo} from "../../store/todo-state/entity/todo.interface";
 import {SharedDialogComponent} from "../../shared/components/dialog/dialog.component";
 import {MatDialog} from "@angular/material/dialog";
-import {TodoService} from "../../shared/services/todo.service";
 import {FormControl} from "@angular/forms";
 
 @Component({
